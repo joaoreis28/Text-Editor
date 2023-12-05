@@ -5,6 +5,7 @@
 #include  <unistd.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 #include <errno.h>
 #include <sys/ioctl.h>
 
@@ -122,21 +123,52 @@ int getWindowSize(int *rows, int *cols) {
   {
     *cols = ws.ws_col;
     *rows = ws.ws_row;
-    
+
     return 0;
   }
 }
 
+/*APPEND BUFFER*/
+
+struct abuf
+{
+    int len;
+    char* b;
+};
+
+#define ABUF_INIT {NULL, 0}
+
+
+void abAppend(struct abuf *ab, const char *s, int len )
+{
+    char* new = realloc(ab->b, ab->len +len);
+
+    if(new == NULL)
+        return;
+    memcpy(&new[ab->len], s, len);
+    ab->b = new;
+    ab->len += len;
+
+}
+
+
+void abFree(struct abuf* ab)
+{
+    free(ab->b);
+}
 
 /*OUTPUT*/
 
-void editorDrawRows()
-{
-    int y;
-    for(y = 0; y < E.screenrows; y++)
+void editorDrawRows() {
+  int y;
+  for (y = 0; y < E.screenrows; y++)
+  {
+    write(STDOUT_FILENO, "~", 1);
+    if (y < E.screenrows - 1) 
     {
-        write(STDOUT_FILENO, "~\r\n", 3);
+      write(STDOUT_FILENO, "\r\n", 2);
     }
+  }
 }
 
 void editorRefreshScreen()

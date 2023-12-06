@@ -159,24 +159,26 @@ void abFree(struct abuf* ab)
 
 /*OUTPUT*/
 
-void editorDrawRows() {
+void editorDrawRows(struct abuf *ab) {
   int y;
   for (y = 0; y < E.screenrows; y++)
   {
-    write(STDOUT_FILENO, "~", 1);
+    abAppend(ab, "~", 1);
+
     if (y < E.screenrows - 1) 
     {
-      write(STDOUT_FILENO, "\r\n", 2);
+      abAppend(ab, "\r\n", 2);
     }
   }
 }
 
 void editorRefreshScreen()
 {
+    struct abuf ab = ABUF_INIT;
     write(STDOUT_FILENO, "\x1b[2J", 4);
     write(STDOUT_FILENO, "\x1b[H", 3);
 
-    editorDrawRows();
+    editorDrawRows(&ab);
 
     write(STDOUT_FILENO, "\x1b[H", 3);
 }

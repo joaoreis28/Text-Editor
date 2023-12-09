@@ -14,6 +14,9 @@ Este é um projeto de um simples editor de texto em linguagem C. Este editor foi
 
 Para compilar e executar o editor, você precisará de um compilador C, como o GCC. Certifique-se de ter um ambiente de desenvolvimento C configurado em seu sistema.
 
+## Makefile
+
+
 ## Como Compilar
 
 1. Clone o repositório para o seu ambiente local.

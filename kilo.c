@@ -202,7 +202,10 @@ void abFree(struct abuf *ab) {
 void editorDrawRows(struct abuf *ab) {
   int y;
   for (y = 0; y < E.screenrows; y++) {
-    if (y == E.screenrows / 3) {
+    
+  if( y >= E.numrows){
+  
+    if (y >= E.screenrows / 3) {
       char welcome[80];
       int welcomelen = snprintf(welcome, sizeof(welcome),
         "Kilo editor -- version %s", KILO_VERSION);
@@ -217,7 +220,13 @@ void editorDrawRows(struct abuf *ab) {
     } else {
       abAppend(ab, "~", 1);
     }
-
+  }
+  else
+  {
+    int len = E.row.size;
+    if(len > E.screencols) len = E.screencols;
+    abAppend(ab, E.row.chars, len);
+  }
     abAppend(ab, "\x1b[K", 3);
     if (y < E.screenrows - 1) {
       abAppend(ab, "\r\n", 2);
@@ -319,6 +328,7 @@ void initEditor() {
 int main() {
   enableRawMode();
   initEditor();
+  editorOpen();
 
   while (1) {
     editorRefreshScreen();

@@ -46,3 +46,5 @@ Para compilar e executar o editor, você precisará de um compilador C, como o G
    ```bash
    git clone https://github.com/seu-usuario/editor-de-texto-c.git
 
+
+Version 0.0.1

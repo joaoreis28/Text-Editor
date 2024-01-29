@@ -47,5 +47,5 @@ Para compilar e executar o editor, você precisará de um compilador C, como o G
    git clone https://github.com/seu-usuario/editor-de-texto-c.git
 
 
-Versão  1.1.1
-Version 1.1.1
+Versão  1.2.0
+Version 1.2.0

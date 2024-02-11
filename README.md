@@ -49,3 +49,5 @@ Para compilar e executar o editor, você precisará de um compilador C, como o G
 
 Versão  1.2.0
 Version 1.2.0
+
+  <img src="image.png" />
